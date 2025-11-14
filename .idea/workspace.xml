@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dbb78dc7-21d7-405e-bdf5-eada444974f9" name="Changes" comment="Add IntelliJ .iml file back" />
+    <list default="true" id="dbb78dc7-21d7-405e-bdf5-eada444974f9" name="Changes" comment="Add IntelliJ .iml file back">
+      <change afterPath="$PROJECT_DIR$/src/factory/drinks/Coffee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/factory/drinks/SoftDrink.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/factory/drinks/Tea.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/factory/food/Beshbarmak.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/factory/food/Chicken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/factory/food/Manti.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/factory/food/Pasta.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/factory/food/Pilau.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/factory/food/Shashlik.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/RestaurantApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/factory/Burger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/food/Burger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/factory/MealFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/MealFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/factory/MealType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/MealType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/factory/Pizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/food/Pizza.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/factory/Salad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/food/Salad.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,10 +67,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.RestaurantApp.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "feature/factory-strategy",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/a1d1yar/Desktop/SDP",
     "node.js.detected.package.eslint": "true",
@@ -61,7 +80,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "/Users/a1d1yar/Desktop/SDP/src/Main.java",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
@@ -96,7 +115,7 @@
       <updated>1763131575937</updated>
       <workItem from="1763131577042" duration="139000" />
       <workItem from="1763131728730" duration="2826000" />
-      <workItem from="1763135361650" duration="2072000" />
+      <workItem from="1763135361650" duration="7531000" />
     </task>
     <task id="LOCAL-00001" summary="Add IntelliJ .iml file back">
       <option name="closed" value="true" />
@@ -115,16 +134,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add IntelliJ .iml file back" />
     <option name="LAST_COMMIT_MESSAGE" value="Add IntelliJ .iml file back" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>11</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

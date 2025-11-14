@@ -1,20 +1,20 @@
-package factory;
+package factory.food;
 
 import model.Meal;
 
-public class Pizza implements Meal {
+public class Chicken implements Meal {
     @Override
     public String getName() {
-        return "Pizza";
+        return "Chicken";
     }
 
     @Override
     public double getPrice() {
-        return 10.0;
+        return 12.0;
     }
 
     @Override
     public String getDescription() {
-        return "Delicious cheese pizza";
+        return "Grilled chicken served with your choice of sides";
     }
 }

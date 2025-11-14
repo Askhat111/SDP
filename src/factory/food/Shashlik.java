@@ -1,20 +1,20 @@
-package factory;
+package factory.food;
 
 import model.Meal;
 
-public class Burger implements Meal {
+public class Shashlik implements Meal {
     @Override
     public String getName() {
-        return "Burger";
+        return "Shashlik (Lamb)";
     }
 
     @Override
     public double getPrice() {
-        return 8.0;
+        return 16.0;
     }
 
     @Override
     public String getDescription() {
-        return "Classic beef burger";
+        return "Juicy lamb kebab grilled to perfection";
     }
 }

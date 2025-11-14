@@ -1,5 +1,6 @@
 package factory;
 
 public enum MealType {
-    PIZZA, BURGER, SALAD
+    FOOD,
+    DRINK;
 }
