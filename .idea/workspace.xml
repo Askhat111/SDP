@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dbb78dc7-21d7-405e-bdf5-eada444974f9" name="Changes" comment="Add IntelliJ .iml file back">
-      <change afterPath="$PROJECT_DIR$/src/strategy/BirthdayDiscountPricing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/strategy/LoyaltyDiscountPricing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SDP/main/RestaurantApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SDP/main/RestaurantApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SDP/strategy/DiscountPricing.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SDP/strategy/HappyHourPricing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SDP/strategy/HappyHourPricing.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SDP/strategy/PricingStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SDP/strategy/PricingStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SDP/strategy/StandardPricing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SDP/strategy/StandardPricing.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/RestaurantApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/RestaurantApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/strategy/DiscountPricing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/StudentDiscountPricing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/strategy/HappyHourPricing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/HappyHourPricing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/strategy/PricingStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/PricingStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/strategy/StandardPricing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/StandardPricing.java" afterDir="false" />
-    </list>
+    <list default="true" id="dbb78dc7-21d7-405e-bdf5-eada444974f9" name="Changes" comment="Add IntelliJ .iml file back" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,28 +47,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Application.RestaurantApp.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/factory-strategy",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/a1d1yar/Desktop/SDP",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "/Users/a1d1yar/Desktop/SDP/src/Main.java",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.RestaurantApp.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/factory-strategy&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/a1d1yar/Desktop/SDP&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/a1d1yar/Desktop/SDP/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main" />
