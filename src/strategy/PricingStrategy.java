@@ -1,6 +1,8 @@
 package strategy;
 
+import model.Meal;
+
 public interface PricingStrategy {
-    double calculatePrice(double basePrice);
+    double calculatePrice(Meal meal);
     String getStrategyName();
 }

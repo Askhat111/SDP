@@ -2,14 +2,14 @@ package strategy;
 
 import model.Meal;
 
-public class StandardPricing implements PricingStrategy {
+public class StudentDiscountPricing implements PricingStrategy {
     @Override
     public double calculatePrice(Meal meal) {
-        return meal.getPrice();
+        return meal.getPrice() * 0.9;
     }
 
     @Override
     public String getStrategyName() {
-        return "Standard Pricing";
+        return "Student Discount Pricing";
     }
 }

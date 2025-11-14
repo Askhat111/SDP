@@ -5,23 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dbb78dc7-21d7-405e-bdf5-eada444974f9" name="Changes" comment="Add IntelliJ .iml file back">
-      <change afterPath="$PROJECT_DIR$/src/factory/drinks/Coffee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/factory/drinks/SoftDrink.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/factory/drinks/Tea.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/factory/food/Beshbarmak.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/factory/food/Chicken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/factory/food/Manti.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/factory/food/Pasta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/factory/food/Pilau.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/factory/food/Shashlik.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/RestaurantApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/strategy/BirthdayDiscountPricing.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/strategy/LoyaltyDiscountPricing.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/factory/Burger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/food/Burger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/factory/MealFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/MealFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/factory/MealType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/MealType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/factory/Pizza.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/food/Pizza.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/factory/Salad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/food/Salad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SDP/main/RestaurantApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SDP/main/RestaurantApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SDP/strategy/DiscountPricing.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SDP/strategy/HappyHourPricing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SDP/strategy/HappyHourPricing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SDP/strategy/PricingStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SDP/strategy/PricingStrategy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SDP/strategy/StandardPricing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SDP/strategy/StandardPricing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/RestaurantApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/RestaurantApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/DiscountPricing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/StudentDiscountPricing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/HappyHourPricing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/HappyHourPricing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/PricingStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/PricingStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategy/StandardPricing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategy/StandardPricing.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +111,7 @@
       <updated>1763131575937</updated>
       <workItem from="1763131577042" duration="139000" />
       <workItem from="1763131728730" duration="2826000" />
-      <workItem from="1763135361650" duration="7531000" />
+      <workItem from="1763135361650" duration="10860000" />
     </task>
     <task id="LOCAL-00001" summary="Add IntelliJ .iml file back">
       <option name="closed" value="true" />
