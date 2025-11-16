@@ -10,9 +10,9 @@ public class PaymentAdapter implements PaymentProcessor {
         this.externalAPI = externalAPI;
         this.exchangeRates = Map.of(
                 "USD", 1.0,
-                "KZT", 476.19,
-                "EUR", 0.93,
-                "GBP", 0.79
+                "KZT", 524.6,
+                "EUR", 0.86,
+                "GBP", 0.76
         );
     }
 
