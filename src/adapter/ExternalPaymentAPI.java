@@ -2,20 +2,26 @@ package adapter;
 
 public class ExternalPaymentAPI {
     public PaymentResult processPayment(PaymentRequest request) {
-        System.out.println("Processing payment through external gateway...");
-        System.out.println("Merchant: " + request.getMerchantId());
-        System.out.println("Amount: " + request.getAmount() + " " + request.getCurrency());
+        displayPaymentInfo(request);
 
         String transactionId = "trs_" + System.currentTimeMillis();
         logTransaction(transactionId, request.getAmount(), request.getCurrency());
-
         return new PaymentResult(true, transactionId, "Payment completed successfully");
+    }
+
+    private void displayPaymentInfo(PaymentRequest request) {
+        System.out.println("PROCESSING PAYMENT");
+        System.out.println("Seller: " + request.getMerchantId());
+        System.out.println("Amount: " + request.getAmount() + " " + request.getCurrency());
+        System.out.println("Processing payment...");
     }
 
     private void logTransaction(String transactionId, double amount, String currency) {
         System.out.println("Transaction completed:");
         System.out.println("ID: " + transactionId);
         System.out.println("Amount: " + amount + " " + currency);
+        System.out.println("PAYMENT SUCCESSFUL");
+        System.out.println("Transaction ID: " + transactionId);
     }
 
     public boolean isCurrencySupported(String currency) {

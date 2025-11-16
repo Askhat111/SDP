@@ -1,37 +1,26 @@
 package facade;
 
-import adapter.ExternalPaymentAPI;
-import adapter.PaymentAdapter;
-import adapter.PaymentProcessor;
-import decorator.CheeseTopping;
-import decorator.DrinkCombo;
-import decorator.LargeSize;
-import decorator.SpicyOption;
+import adapter.*;
+import decorator.*;
 import factory.MealFactory;
 import model.Meal;
-import observer.CustomerApp;
-import observer.KitchenDisplay;
-import observer.Order;
-import observer.OrderStatus;
-import strategy.BirthdayDiscountPricing;
-import strategy.HappyHourPricing;
-import strategy.LoyaltyDiscountPricing;
-import strategy.PricingStrategy;
-import strategy.StandardPricing;
-import strategy.StudentDiscountPricing;
+import observer.*;
+import strategy.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Map;
 
-public class RestaurantFacade{
+public class RestaurantFacade {
     private final Scanner scanner;
     private final PaymentProcessor paymentProcessor;
     private PricingStrategy pricingStrategy;
     private Order order;
     private double totalWithStrategy;
     private final List<Meal> items;
+    private final Map<String, Double> exchangeRates;
 
-    public RestaurantFacade(){
+    public RestaurantFacade() {
         this.scanner = new Scanner(System.in);
         this.paymentProcessor = new PaymentAdapter(new ExternalPaymentAPI());
         this.order = new Order();
@@ -40,6 +29,12 @@ public class RestaurantFacade{
         this.totalWithStrategy = 0.0;
         this.pricingStrategy = null;
         this.items = new ArrayList<>();
+        this.exchangeRates = Map.of(
+                "USD", 1.0,
+                "KZT", 524.6,
+                "EUR", 0.86,
+                "GBP", 0.76
+        );
     }
 
     public void start() {
@@ -67,18 +62,18 @@ public class RestaurantFacade{
         }
     }
 
-    private PricingStrategy choosePricingStrategy(){
+    private PricingStrategy choosePricingStrategy() {
         System.out.println("Choose a pricing strategy:");
-        System.out.println("1. Standard Pricing");
-        System.out.println("2. Student Discount");
-        System.out.println("3. Happy Hour Pricing");
-        System.out.println("4. Birthday Discount");
-        System.out.println("5. Loyalty Discount");
+        System.out.println("1. Standard Pricing (0% discount)");
+        System.out.println("2. Student Discount (10% discount)");
+        System.out.println("3. Happy Hour Pricing (50% discount)");
+        System.out.println("4. Birthday Discount (20% discount)");
+        System.out.println("5. Loyalty Discount (15% discount)");
         System.out.print("Enter your choice: ");
 
         int choice = readInt();
 
-        switch (choice){
+        switch (choice) {
             case 1:
                 return new StandardPricing();
             case 2:
@@ -97,7 +92,7 @@ public class RestaurantFacade{
         }
     }
 
-    private int chooseCategory(){
+    private int chooseCategory() {
         System.out.println("\nChoose a category:");
         System.out.println("1. Food");
         System.out.println("2. Drinks");
@@ -106,7 +101,7 @@ public class RestaurantFacade{
         return readInt();
     }
 
-    private void handleFood(){
+    private void handleFood() {
         System.out.println("Choose a food item:");
         System.out.println("1. Pizza");
         System.out.println("2. Burger");
@@ -133,7 +128,7 @@ public class RestaurantFacade{
         addItemToOrder(meal);
     }
 
-    private void handleDrink(){
+    private void handleDrink() {
         System.out.println("Choose a drink:");
         System.out.println("1. Moroccan Tea");
         System.out.println("2. Ginger Tea");
@@ -160,7 +155,7 @@ public class RestaurantFacade{
         addItemToOrder(drink);
     }
 
-    private void addItemToOrder(Meal meal){
+    private void addItemToOrder(Meal meal) {
         order.addMeal(meal);
         items.add(meal);
 
@@ -172,7 +167,7 @@ public class RestaurantFacade{
 
         System.out.println("\nCurrent order:");
         System.out.println("Items: " + order.getItemCount());
-        System.out.println("Base subtotal: " + order.getSubtotal());
+        System.out.println("Base subtotal: $" + order.getSubtotal());
 
         System.out.print("Do you want to pay now? (y/n): ");
         if (yes()) {
@@ -180,53 +175,64 @@ public class RestaurantFacade{
         }
     }
 
-    private Meal applyDecoratorsToFood(Meal meal){
+    private Meal applyDecoratorsToFood(Meal meal) {
         System.out.println("Add extra cheese? (y/n)");
-        if (yes()){
+        if (yes()) {
             meal = new CheeseTopping(meal);
         }
         System.out.println("Make it large size? (y/n)");
-        if (yes()){
+        if (yes()) {
             meal = new LargeSize(meal);
         }
         System.out.println("Make it spicy? (y/n)");
-        if (yes()){
+        if (yes()) {
             meal = new SpicyOption(meal);
         }
         System.out.println("Add drink combo? (y/n)");
-        if (yes()){
+        if (yes()) {
             meal = new DrinkCombo(meal);
         }
         return meal;
     }
-    private void processPayment(){
-        if (order.getItemCount() == 0){
+
+    private void processPayment() {
+        if (order.getItemCount() == 0) {
             System.out.println("Your order is empty.");
             return;
         }
-        if (pricingStrategy == null){
+        if (pricingStrategy == null) {
             pricingStrategy = choosePricingStrategy();
         }
+
         totalWithStrategy = 0.0;
-        for (Meal meal : items){
+        for (Meal meal : items) {
             totalWithStrategy += pricingStrategy.calculatePrice(meal);
         }
 
+        double baseSubtotal = order.getSubtotal();
+        double discountAmount = baseSubtotal - totalWithStrategy;
+        double discountPercent = (discountAmount / baseSubtotal) * 100;
+
         System.out.println("\nFinal order summary:");
         System.out.println("Items: " + order.getItemCount());
-        System.out.println("Base subtotal: " + order.getSubtotal());
+        System.out.println("Base subtotal: $" + baseSubtotal);
+        System.out.println("Discount: " + String.format("%.1f", discountPercent) + "%");
         System.out.println("Final price (" + pricingStrategy.getStrategyName() + "): $" + totalWithStrategy);
+
         System.out.print("Enter currency (USD, EUR, KZT, GBP): ");
         String currency = readLine().trim().toUpperCase();
 
-        if (!paymentProcessor.supportsCurrency(currency)) {
-            System.out.println("Currency not supported.");
-            System.out.println("Supported currencies: " + paymentProcessor.getSupportedCurrencies());
-            return;
+        if (!exchangeRates.containsKey(currency)) {
+            System.out.println("Unsupported currency. Using USD.");
+            currency = "USD";
         }
-        boolean success = paymentProcessor.processPayment(totalWithStrategy, order.getOrderId(), currency);
 
-        if (success){
+        double convertedAmount = convertToCurrency(totalWithStrategy, currency);
+        displayConversionDetails(totalWithStrategy, convertedAmount, currency);
+
+        boolean success = paymentProcessor.processPayment(convertedAmount, order.getOrderId(), currency);
+
+        if (success) {
             System.out.println("Payment successful via " + paymentProcessor.getProcessorName());
             order.setStatus(OrderStatus.CONFIRMED);
             order.setStatus(OrderStatus.PREPARING);
@@ -243,9 +249,20 @@ public class RestaurantFacade{
         }
     }
 
-    private String normalizeFoodChoice(String input){
+    private double convertToCurrency(double amountUSD, String targetCurrency) {
+        double rate = exchangeRates.get(targetCurrency);
+        return amountUSD * rate;
+    }
+
+    private void displayConversionDetails(double amountUSD, double convertedAmount, String currency) {
+        System.out.println("Currency conversion:");
+        System.out.printf("$%.2f USD = %.2f %s%n", amountUSD, convertedAmount, currency);
+        System.out.printf("Exchange rate: 1 USD = %.2f %s%n", exchangeRates.get(currency), currency);
+    }
+
+    private String normalizeFoodChoice(String input) {
         String value = input.trim().toLowerCase();
-        switch (value){
+        switch (value) {
             case "1": return "pizza";
             case "2": return "burger";
             case "3": return "salad";
@@ -257,7 +274,8 @@ public class RestaurantFacade{
             default: return value;
         }
     }
-    private String normalizeDrinkChoice(String input){
+
+    private String normalizeDrinkChoice(String input) {
         String value = input.trim().toLowerCase();
         switch (value) {
             case "1": return "moroccan tea";
@@ -272,16 +290,19 @@ public class RestaurantFacade{
             default: return value;
         }
     }
-    private boolean yes(){
+
+    private boolean yes() {
         String line = readLine().trim();
         return line.equalsIgnoreCase("y");
     }
-    private int readInt(){
+
+    private int readInt() {
         int n = scanner.nextInt();
         scanner.nextLine();
         return n;
     }
-    private String readLine(){
+
+    private String readLine() {
         return scanner.nextLine();
     }
 }
