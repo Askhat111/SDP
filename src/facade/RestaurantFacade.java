@@ -257,7 +257,6 @@ public class RestaurantFacade{
             default: return value;
         }
     }
-
     private String normalizeDrinkChoice(String input){
         String value = input.trim().toLowerCase();
         switch (value) {
