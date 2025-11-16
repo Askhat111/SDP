@@ -11,7 +11,7 @@ public class Order {
     private OrderStatus status;
 
     public Order() {
-        this.orderId = "ORD-" + System.currentTimeMillis();
+        this.orderId = "ORD-" + (10000 + (int)(Math.random() * 90000));
         this.observers = new ArrayList<>();
         this.meals = new ArrayList<>();
         this.status = OrderStatus.CREATED;
