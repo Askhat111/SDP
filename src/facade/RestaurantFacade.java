@@ -19,33 +19,33 @@ import strategy.LoyaltyDiscountPricing;
 import strategy.PricingStrategy;
 import strategy.StandardPricing;
 import strategy.StudentDiscountPricing;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class RestaurantFacade {
-
+public class RestaurantFacade{
     private final Scanner scanner;
     private final PaymentProcessor paymentProcessor;
-
     private PricingStrategy pricingStrategy;
     private Order order;
     private double totalWithStrategy;
+    private final List<Meal> items;
 
-    public RestaurantFacade() {
+    public RestaurantFacade(){
         this.scanner = new Scanner(System.in);
         this.paymentProcessor = new PaymentAdapter(new ExternalPaymentAPI());
         this.order = new Order();
         this.order.addObserver(new KitchenDisplay());
         this.order.addObserver(new CustomerApp("Customer"));
         this.totalWithStrategy = 0.0;
+        this.pricingStrategy = null;
+        this.items = new ArrayList<>();
     }
 
     public void start() {
-        pricingStrategy = choosePricingStrategy();
-
+        System.out.println("Welcome to the Restaurant Ordering System!");
         while (true) {
             int category = chooseCategory();
-
             if (category == 3) {
                 if (order.getItemCount() > 0) {
                     System.out.println("You have items in your order.");
@@ -57,7 +57,6 @@ public class RestaurantFacade {
                 System.out.println("Thank you for visiting! Goodbye.");
                 break;
             }
-
             if (category == 1) {
                 handleFood();
             } else if (category == 2) {
@@ -68,9 +67,7 @@ public class RestaurantFacade {
         }
     }
 
-    private PricingStrategy choosePricingStrategy() {
-        System.out.println("Welcome to the Restaurant Ordering System!");
-
+    private PricingStrategy choosePricingStrategy(){
         System.out.println("Choose a pricing strategy:");
         System.out.println("1. Standard Pricing");
         System.out.println("2. Student Discount");
@@ -81,7 +78,7 @@ public class RestaurantFacade {
 
         int choice = readInt();
 
-        switch (choice) {
+        switch (choice){
             case 1:
                 return new StandardPricing();
             case 2:
@@ -100,7 +97,7 @@ public class RestaurantFacade {
         }
     }
 
-    private int chooseCategory() {
+    private int chooseCategory(){
         System.out.println("\nChoose a category:");
         System.out.println("1. Food");
         System.out.println("2. Drinks");
@@ -109,7 +106,7 @@ public class RestaurantFacade {
         return readInt();
     }
 
-    private void handleFood() {
+    private void handleFood(){
         System.out.println("Choose a food item:");
         System.out.println("1. Pizza");
         System.out.println("2. Burger");
@@ -136,7 +133,7 @@ public class RestaurantFacade {
         addItemToOrder(meal);
     }
 
-    private void handleDrink() {
+    private void handleDrink(){
         System.out.println("Choose a drink:");
         System.out.println("1. Moroccan Tea");
         System.out.println("2. Ginger Tea");
@@ -163,20 +160,19 @@ public class RestaurantFacade {
         addItemToOrder(drink);
     }
 
-    private void addItemToOrder(Meal meal) {
+    private void addItemToOrder(Meal meal){
         order.addMeal(meal);
+        items.add(meal);
 
-        double itemPrice = pricingStrategy.calculatePrice(meal);
-        totalWithStrategy += itemPrice;
+        double basePrice = meal.getPrice();
 
         System.out.println("\nAdded to order: " + meal.getName());
         System.out.println("Description: " + meal.getDescription());
-        System.out.println("Item price with strategy: $" + itemPrice);
+        System.out.println("Item base price: $" + basePrice);
 
         System.out.println("\nCurrent order:");
         System.out.println("Items: " + order.getItemCount());
         System.out.println("Base subtotal: " + order.getSubtotal());
-        System.out.println("Total with pricing strategy: $" + totalWithStrategy);
 
         System.out.print("Do you want to pay now? (y/n): ");
         if (yes()) {
@@ -184,36 +180,42 @@ public class RestaurantFacade {
         }
     }
 
-    private Meal applyDecoratorsToFood(Meal meal) {
+    private Meal applyDecoratorsToFood(Meal meal){
         System.out.println("Add extra cheese? (y/n)");
-        if (yes()) {
+        if (yes()){
             meal = new CheeseTopping(meal);
         }
-
         System.out.println("Make it large size? (y/n)");
-        if (yes()) {
+        if (yes()){
             meal = new LargeSize(meal);
         }
-
         System.out.println("Make it spicy? (y/n)");
-        if (yes()) {
+        if (yes()){
             meal = new SpicyOption(meal);
         }
-
         System.out.println("Add drink combo? (y/n)");
-        if (yes()) {
+        if (yes()){
             meal = new DrinkCombo(meal);
         }
-
         return meal;
     }
-
-    private void processPayment() {
-        if (order.getItemCount() == 0) {
+    private void processPayment(){
+        if (order.getItemCount() == 0){
             System.out.println("Your order is empty.");
             return;
         }
+        if (pricingStrategy == null){
+            pricingStrategy = choosePricingStrategy();
+        }
+        totalWithStrategy = 0.0;
+        for (Meal meal : items){
+            totalWithStrategy += pricingStrategy.calculatePrice(meal);
+        }
 
+        System.out.println("\nFinal order summary:");
+        System.out.println("Items: " + order.getItemCount());
+        System.out.println("Base subtotal: " + order.getSubtotal());
+        System.out.println("Final price (" + pricingStrategy.getStrategyName() + "): $" + totalWithStrategy);
         System.out.print("Enter currency (USD, EUR, KZT, GBP): ");
         String currency = readLine().trim().toUpperCase();
 
@@ -222,28 +224,28 @@ public class RestaurantFacade {
             System.out.println("Supported currencies: " + paymentProcessor.getSupportedCurrencies());
             return;
         }
-
         boolean success = paymentProcessor.processPayment(totalWithStrategy, order.getOrderId(), currency);
 
-        if (success) {
+        if (success){
             System.out.println("Payment successful via " + paymentProcessor.getProcessorName());
             order.setStatus(OrderStatus.CONFIRMED);
             order.setStatus(OrderStatus.PREPARING);
             order.setStatus(OrderStatus.READY);
             order.setStatus(OrderStatus.COMPLETED);
-
             order = new Order();
             order.addObserver(new KitchenDisplay());
             order.addObserver(new CustomerApp("Customer"));
+            items.clear();
             totalWithStrategy = 0.0;
+            pricingStrategy = null;
         } else {
             System.out.println("Payment failed. Please try again.");
         }
     }
 
-    private String normalizeFoodChoice(String input) {
+    private String normalizeFoodChoice(String input){
         String value = input.trim().toLowerCase();
-        switch (value) {
+        switch (value){
             case "1": return "pizza";
             case "2": return "burger";
             case "3": return "salad";
@@ -255,8 +257,7 @@ public class RestaurantFacade {
             default: return value;
         }
     }
-
-    private String normalizeDrinkChoice(String input) {
+    private String normalizeDrinkChoice(String input){
         String value = input.trim().toLowerCase();
         switch (value) {
             case "1": return "moroccan tea";
@@ -271,19 +272,16 @@ public class RestaurantFacade {
             default: return value;
         }
     }
-
-    private boolean yes() {
+    private boolean yes(){
         String line = readLine().trim();
         return line.equalsIgnoreCase("y");
     }
-
-    private int readInt() {
+    private int readInt(){
         int n = scanner.nextInt();
         scanner.nextLine();
         return n;
     }
-
-    private String readLine() {
+    private String readLine(){
         return scanner.nextLine();
     }
 }
