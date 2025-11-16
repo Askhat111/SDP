@@ -8,11 +8,7 @@ public class PaymentAdapter implements PaymentProcessor {
 
     public PaymentAdapter(ExternalPaymentAPI externalAPI) {
         this.externalAPI = externalAPI;
-        this.exchangeRates = initializeExchangeRates();
-    }
-
-    private Map<String, Double> initializeExchangeRates() {
-        return Map.of(
+        this.exchangeRates = Map.of(
                 "USD", 1.0,
                 "KZT", 476.19,
                 "EUR", 0.93,
@@ -29,10 +25,11 @@ public class PaymentAdapter implements PaymentProcessor {
             return false;
         }
 
-        ExternalPaymentAPI.PaymentRequest request = createPaymentRequest(convertedAmount, currency);
+        ExternalPaymentAPI.PaymentRequest request =
+                new ExternalPaymentAPI.PaymentRequest(convertedAmount, currency, "restaurant");
         PaymentResult result = externalAPI.processPayment(request);
 
-        logPaymentResult(result);
+        logPaymentSuccess(result.getTransactionId());
         return result.isSuccess();
     }
 
@@ -65,22 +62,18 @@ public class PaymentAdapter implements PaymentProcessor {
     }
 
     private boolean isValidPayment(double amount, String currency) {
-        if (!PaymentValidator.validateCurrency(currency)) {
+        if (!Currency.isSupported(currency)) {
             System.out.println("Unsupported currency: " + currency);
             System.out.println("Supported: " + getSupportedCurrencies());
             return false;
         }
 
-        if (!PaymentValidator.validateAmount(amount)) {
+        if (amount <= 0) {
             System.out.println("Invalid amount: " + amount);
             return false;
         }
 
         return true;
-    }
-
-    private ExternalPaymentAPI.PaymentRequest createPaymentRequest(double amount, String currency) {
-        return new ExternalPaymentAPI.PaymentRequest(amount, currency, "restaurant");
     }
 
     private String getCurrencySymbol(String currency) {
@@ -91,7 +84,8 @@ public class PaymentAdapter implements PaymentProcessor {
         }
     }
 
-    private void logPaymentResult(PaymentResult result) {
-        TransactionLogger.logPaymentSuccess(result.getTransactionId());
+    private void logPaymentSuccess(String transactionId) {
+        System.out.println("PAYMENT SUCCESSFUL");
+        System.out.println("Transaction ID: " + transactionId);
     }
 }

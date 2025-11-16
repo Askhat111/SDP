@@ -6,14 +6,20 @@ public class ExternalPaymentAPI {
         System.out.println("Merchant: " + request.getMerchantId());
         System.out.println("Amount: " + request.getAmount() + " " + request.getCurrency());
 
-        String transactionId = TransactionIdGenerator.generate();
-        TransactionLogger.logTransaction(transactionId, request.getAmount(), request.getCurrency());
+        String transactionId = "trs_" + System.currentTimeMillis();
+        logTransaction(transactionId, request.getAmount(), request.getCurrency());
 
         return new PaymentResult(true, transactionId, "Payment completed successfully");
     }
 
+    private void logTransaction(String transactionId, double amount, String currency) {
+        System.out.println("Transaction completed:");
+        System.out.println("ID: " + transactionId);
+        System.out.println("Amount: " + amount + " " + currency);
+    }
+
     public boolean isCurrencySupported(String currency) {
-        return PaymentValidator.validateCurrency(currency);
+        return Currency.isSupported(currency);
     }
 
     public String getSupportedCurrencies() {
