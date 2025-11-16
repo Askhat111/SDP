@@ -24,7 +24,13 @@ public class Order {
     public void setStatus(OrderStatus newStatus) {
         if (this.status != newStatus) {
             this.status = newStatus;
-            OrderNotifier.notifyObservers(observers, this, newStatus);
+            notifyObservers(newStatus);
+        }
+    }
+
+    private void notifyObservers(OrderStatus status) {
+        for (OrderObserver observer : observers) {
+            observer.update(this, status);
         }
     }
 
@@ -36,6 +42,12 @@ public class Order {
     public OrderStatus getStatus() { return status; }
     public List<Meal> getMeals() { return new ArrayList<>(meals); }
     public boolean isEmpty() { return meals.isEmpty(); }
-    public double getSubtotal() { return OrderCalculator.calculateSubtotal(meals); }
-    public int getItemCount() { return OrderCalculator.getItemCount(meals); }
+
+    public double getSubtotal() {
+        return meals.stream().mapToDouble(Meal::getPrice).sum();
+    }
+
+    public int getItemCount() {
+        return meals.size();
+    }
 }
