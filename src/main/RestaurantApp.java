@@ -1,5 +1,4 @@
 package main;
-
 import facade.RestaurantFacade;
 
 public class RestaurantApp{

@@ -4,7 +4,7 @@ public class ExternalPaymentAPI {
     public PaymentResult processPayment(PaymentRequest request) {
         displayPaymentInfo(request);
 
-        String transactionId = "trs_" + System.currentTimeMillis();
+        String transactionId = "trs_" + (10000 + (int)(Math.random() * 90000));
         logTransaction(transactionId, request.getAmount(), request.getCurrency());
         return new PaymentResult(true, transactionId, "Payment completed successfully");
     }
